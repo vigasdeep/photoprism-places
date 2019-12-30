@@ -1,0 +1,2 @@
+# photoprism-places
+Places API
