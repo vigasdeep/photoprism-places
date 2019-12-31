@@ -1,0 +1,35 @@
+version: '3.3'
+
+# Example docker-compose config file for production use
+# Container image on Docker Hub: https://hub.docker.com/r/photoprism/places/
+# To keep PhotoPrism Places running, add "restart: always"
+#
+# Usage: docker-compose up
+
+services:
+  places:
+    image: photoprism/places:latest
+    ports:
+      - 8080:8080 # [local port]:[container port]
+    environment: # Run "places help" and "places config" too see all config options and current values
+      PLACES_EXPERIMENTAL: "false"
+      PLACES_DEBUG: "false"
+    volumes:
+      - "places-cache:/home/places/.cache/places"
+
+  places-db:
+    image: mariadb:10.4.11
+    command: mysqld --port=3306 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=1024
+    volumes:
+      - places-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: places
+      MYSQL_USER: places
+      MYSQL_PASSWORD: places
+      MYSQL_DATABASE: places
+
+volumes: # keep this
+  places-data:
+    driver: local
+  places-cache:
+    driver: local

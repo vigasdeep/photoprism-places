@@ -1,0 +1,10 @@
+debug: false
+experimental: false
+database-driver: mysql
+database-dsn: "places:places@tcp(places-db:3306)/places?parseTime=true"
+http-mode: release
+http-port: 8080
+http-host: 0.0.0.0
+pid-filename: ~/.local/share/places/places.pid
+log-filename: ~/.local/share/places/places.log
+detach-server: false

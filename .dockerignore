@@ -1,0 +1,8 @@
+/assets/cache/*
+Dockerfile
+/places
+docker-compose*
+/coverage.*
+.dockerignore
+.idea
+.DS_Store

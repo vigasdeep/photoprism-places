@@ -1,0 +1,32 @@
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+cache:
+  directories:
+    - $HOME/.cache
+
+before_cache:
+  - sudo chown -R travis:travis $HOME/.cache
+
+services:
+  - docker
+
+before_script:
+  - docker-compose -f docker-compose.travis.yml up -d --build
+
+script:
+  - scripts/travis.sh
+
+after_script:
+  - docker-compose -f docker-compose.travis.yml down
+
+deploy:
+  provider: script
+  script: make docker-places
+  skip_cleanup: true
+  on:
+    branch: master

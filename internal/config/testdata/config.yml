@@ -1,0 +1,8 @@
+debug: false
+assets-path: /srv/places
+cache-path: /srv/places/cache
+http-host: 0.0.0.0
+http-mode: release
+http-port: 8080
+database-driver: mysql
+database-dsn: places:places@tcp(places-db:3306)/places?parseTime=true

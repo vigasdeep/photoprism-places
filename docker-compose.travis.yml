@@ -1,0 +1,44 @@
+version: '3.3'
+
+services:
+  places:
+    build: .
+    image: photoprism/places:develop
+    depends_on:
+      - places-db
+    command: tail -f /dev/null
+    volumes:
+      - "~/.cache/npm:/root/.cache/npm"
+      - "~/.cache/go-mod:/go/pkg/mod"
+    environment:
+      PLACES_DEBUG: "true"
+      PLACES_EXPERIMENTAL: "true"
+      PLACES_DATABASE_DSN: "places:places@tcp(places-db:3306)/places?parseTime=true"
+      PLACES_DATABASE_DRIVER: "mysql"
+      PLACES_SERVER_MODE: "debug"
+      PLACES_ASSETS_PATH: "/go/src/github.com/photoprism/photoprism-places/assets"
+      PLACES_CACHE_PATH: "/go/src/github.com/photoprism/photoprism-places/assets/cache"
+      PLACES_CONFIG_PATH: "/go/src/github.com/photoprism/photoprism-places/assets/config"
+      CODECOV_TOKEN:
+      CODECOV_ENV:
+      CODECOV_URL:
+      CODECOV_SLUG:
+      VCS_COMMIT_ID:
+      VCS_BRANCH_NAME:
+      VCS_PULL_REQUEST:
+      VCS_SLUG:
+      VCS_TAG:
+      CI_BUILD_URL:
+      CI_BUILD_ID:
+      CI_JOB_ID:
+
+  places-db:
+    image: mariadb:10.4.11
+    command: mysqld --port=3306 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --max-connections=1024
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: places
+      MYSQL_USER: places
+      MYSQL_PASSWORD: places
+      MYSQL_DATABASE: places
