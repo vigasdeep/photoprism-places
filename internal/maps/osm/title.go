@@ -14,6 +14,18 @@ var labelTitles = map[string]string{
 	"pub":            "",
 	"car":            "",
 	"parking":        "",
+	"police":         "",
+	"shelter":        "",
+	"tank":           "",
+	"greenhouse":     "",
+	"dog park":       "",
+	"escape game":    "",
+	"cafe":           "",
+	"shop":           "",
+	"bar":            "",
+	"bank":           "",
+	"pharmacy":       "",
+	"cinema":         "",
 }
 
 func (l Location) Name() (result string) {
