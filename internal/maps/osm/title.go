@@ -9,6 +9,11 @@ import (
 var labelTitles = map[string]string{
 	"airport":        "Airport",
 	"visitor center": "Visitor Center",
+	"restaurant":     "",
+	"hotel":          "",
+	"pub":            "",
+	"car":            "",
+	"parking":        "",
 }
 
 func (l Location) Name() (result string) {
