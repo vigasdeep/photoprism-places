@@ -82,6 +82,7 @@ var osmCategories = map[string]string{
 	"amenity=parking":          "parking",
 	"amenity=parking_entrance": "parking",
 	"amenity=parking_space":    "parking",
+	"amenity=community_centre": "community center",
 	"*=bank":                   "bank",
 	"*=clinic":                 "hospital",
 	"*=hospital":               "hospital",
