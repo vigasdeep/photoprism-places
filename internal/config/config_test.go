@@ -1,6 +1,7 @@
 package config
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/photoprism/photoprism-places/internal/util"
@@ -58,7 +59,7 @@ func TestConfig_ConfigPath(t *testing.T) {
 	c := NewConfig(ctx)
 
 	configPath := c.ConfigPath()
-	assert.Equal(t, "/go/src/github.com/photoprism/photoprism-places/assets/config", configPath)
+	assert.True(t, strings.Contains(configPath, "assets/config"))
 }
 
 func TestConfig_LogFilename(t *testing.T) {
@@ -66,7 +67,7 @@ func TestConfig_LogFilename(t *testing.T) {
 	c := NewConfig(ctx)
 
 	filename := c.LogFilename()
-	assert.Equal(t, "/go/src/github.com/photoprism/photoprism-places/assets/places.log", filename)
+	assert.True(t, strings.Contains(filename, "assets/places.log"))
 }
 
 func TestConfig_DatabaseDriver(t *testing.T) {

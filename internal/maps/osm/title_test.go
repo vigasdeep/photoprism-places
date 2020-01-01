@@ -19,7 +19,7 @@ func TestOSM_Name(t *testing.T) {
 
 	t.Run("Nice Name 2", func(t *testing.T) {
 		l := &Location{LocCategory: "shop", LocName: "Nice Name 2", LocType: "", LocDisplayName: "dipslay name"}
-		assert.Equal(t, "Nice Name 2", l.Name())
+		assert.Equal(t, "", l.Name())
 	})
 
 	t.Run("Cat", func(t *testing.T) {
