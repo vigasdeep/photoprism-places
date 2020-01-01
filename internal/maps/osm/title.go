@@ -18,7 +18,6 @@ var labelTitles = map[string]string{
 	"shelter":        "",
 	"tank":           "",
 	"greenhouse":     "",
-	"dog park":       "",
 	"escape game":    "",
 	"cafe":           "",
 	"shop":           "",
