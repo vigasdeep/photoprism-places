@@ -9,7 +9,6 @@ import (
 	"github.com/photoprism/photoprism-places/internal/maps"
 	"github.com/photoprism/photoprism-places/internal/s2"
 	"github.com/photoprism/photoprism-places/internal/util"
-	"gopkg.in/ugjka/go-tz.v2/tz"
 )
 
 // Photo location
@@ -170,23 +169,4 @@ func (m *Location) Source() string {
 
 func (m *Location) LatLng() (lat, lng float64) {
 	return s2.LatLng(m.ID)
-}
-
-// TimeZone returns the location time zone as string.
-func (m *Location) Timezone() string {
-	lat, lng := m.LatLng()
-
-	if lat == 0 && lng == 0 {
-		return "UTC"
-	}
-
-	zones, err := tz.GetZone(tz.Point{
-		Lon: lng, Lat: lat,
-	})
-
-	if err != nil {
-		return "UTC"
-	}
-
-	return zones[0]
 }

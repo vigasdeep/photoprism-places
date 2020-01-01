@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/photoprism/photoprism-places/internal/entity"
+	"gopkg.in/ugjka/go-tz.v2/tz"
 )
 
 type LocationResponse struct {
@@ -15,6 +16,24 @@ type LocationResponse struct {
 	Place    *entity.Place `json:"place"`
 }
 
+// Timezone returns the location time zone as string.
+func Timezone(lat, lng float64) string {
+	if lat == 0 && lng == 0 {
+		return "UTC"
+	}
+
+	zones, err := tz.GetZone(tz.Point{
+		Lon: lng, Lat: lat,
+	})
+
+	if err != nil {
+		return "UTC"
+	}
+
+	return zones[0]
+}
+
+// NewLocationResponse returns an initialized LocationResponse.
 func NewLocationResponse(el *entity.Location) *LocationResponse {
 	lat, lng := el.LatLng()
 
@@ -23,7 +42,7 @@ func NewLocationResponse(el *entity.Location) *LocationResponse {
 		Name:     el.Name(),
 		Category: el.Category(),
 		Suburb:   el.Suburb(),
-		Timezone: el.Timezone(),
+		Timezone: Timezone(lat, lng),
 		Lat:      lat,
 		Lng:      lng,
 		Place:    el.Place,
