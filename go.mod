@@ -21,5 +21,6 @@ require (
 	github.com/stretchr/testify v1.4.0
 	github.com/tensorflow/tensorflow v2.0.0+incompatible
 	github.com/urfave/cli v1.22.2
+	gopkg.in/ugjka/go-tz.v2 v2.0.8
 	gopkg.in/yaml.v2 v2.2.7
 )
