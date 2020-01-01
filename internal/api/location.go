@@ -40,7 +40,7 @@ func GetLocation(router *gin.RouterGroup, conf *config.Config) {
 
 		resp := NewLocationResponse(location)
 
-		gc.Set(cacheKey, resp, 3*time.Hour)
+		gc.Set(cacheKey, resp, 6*time.Hour)
 
 		c.JSON(http.StatusOK, resp)
 	})
