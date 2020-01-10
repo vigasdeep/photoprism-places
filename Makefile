@@ -73,6 +73,9 @@ docker-development:
 docker-places:
 	scripts/docker-build.sh places $(DOCKER_TAG)
 	scripts/docker-push.sh places $(DOCKER_TAG)
+docker-photon:
+	scripts/docker-build.sh photon $(DOCKER_TAG)
+	scripts/docker-push.sh photon $(DOCKER_TAG)
 fmt-go:
 	goimports -w internal cmd
 	go fmt ./internal/... ./cmd/...
@@ -81,3 +84,6 @@ tidy:
 upgrade-go:
 	go mod tidy
 	go get -u
+photon_data:
+	wget -O - http://download1.graphhopper.com/public/photon-db-latest.tar.bz2 | pbzip2 -cd | tar x
+    chown -R 1000:1000 photon_data

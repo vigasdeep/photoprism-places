@@ -14,6 +14,8 @@ import (
 	"github.com/photoprism/photoprism-places/internal/entity"
 	"github.com/photoprism/photoprism-places/internal/event"
 	"github.com/photoprism/photoprism-places/internal/maps/opencage"
+	"github.com/photoprism/photoprism-places/internal/maps/osm"
+	"github.com/photoprism/photoprism-places/internal/maps/photon"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
@@ -281,16 +283,16 @@ func (c *Config) MigrateDb() {
 		&entity.Event{},
 		&entity.Place{},
 		&entity.Location{},
-		&entity.Country{},
 	)
 
 	entity.CreateUnknownPlace(db)
-	entity.CreateUnknownCountry(db)
 }
 
 // Init initialises the application config.
 func (c *Config) Init(ctx context.Context) error {
-	opencage.ApiKey = c.OpenCageKey()
+	opencage.ProviderKey = c.OpenCageKey()
+	photon.ProviderUrl = c.PhotonUrl()
+	osm.NominatimUrl = c.NominatimUrl()
 	return c.connectToDatabase(ctx)
 }
 
@@ -303,11 +305,17 @@ func (c *Config) Shutdown() {
 	}
 }
 
-// OpenCageKey returns the OpenCage API Key.
+// OpenCageKey returns the OpenCage API key.
 func (c *Config) OpenCageKey() string {
-	if c.config.OpenCageKey == "" {
-		log.Error("config: OpenCage API key is missing")
-	}
-
 	return c.config.OpenCageKey
+}
+
+// PhotonUrl returns the Photon server URL.
+func (c *Config) PhotonUrl() string {
+	return c.config.PhotonUrl
+}
+
+// NominatimUrl returns the OpenStreetMap Nominatim server URL.
+func (c *Config) NominatimUrl() string {
+	return c.config.NominatimUrl
 }

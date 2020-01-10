@@ -1,4 +1,22 @@
-package osm
+/*
+This package encapsulates the Photon API.
+
+Additional information can be found in our Developer Guide:
+
+https://github.com/photoprism/photoprism/wiki
+*/
+package photon
+
+//go:generate go run gen.go
+
+import (
+	"github.com/photoprism/photoprism-places/internal/event"
+)
+
+var ProviderName = "photon"
+var ProviderUrl = "https://photon.komoot.de/"
+
+var log = event.Log
 
 var categories = map[string]string{
 	"aeroway=*":                "airport",
@@ -40,12 +58,14 @@ var categories = map[string]string{
 	"*=hostel":                 "hotel",
 	"*=motel":                  "hotel",
 	"tourism=information":      "visitor center",
+	"*=information":            "visitor center",
 	"*=picnic_site":            "hiking",
 	"*=theme_park":             "theme park",
 	"*=viewpoint":              "viewpoint",
 	"*=wilderness_hut":         "hiking",
 	"*=zoo":                    "zoo",
 	"shop=*":                   "shop",
+	"*=shop":                   "shop",
 	"shop=butcher":             "butcher",
 	"shop=department_store":    "department store",
 	"*=supermarket":            "supermarket",

@@ -49,6 +49,8 @@ type Params struct {
 	DetachServer   bool   `yaml:"detach-server" flag:"detach-server"`
 	PIDFilename    string `yaml:"pid-filename" flag:"pid-filename"`
 	OpenCageKey    string `yaml:"opencage-key" flag:"opencage-key"`
+	PhotonUrl      string `yaml:"photon-url" flag:"photon-url"`
+	NominatimUrl   string `yaml:"nominatim-url" flag:"nominatim-url"`
 }
 
 // NewParams() creates a new configuration entity by using two methods:

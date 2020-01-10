@@ -7,7 +7,7 @@ import (
 )
 
 func TestEvent_TableName(t *testing.T) {
-	event := &Event{EventSlug: "christmas-2000"}
+	event := &Event{Location: "c47a85a64c"}
 	tableName := event.TableName()
 
 	assert.Equal(t, "events", tableName)

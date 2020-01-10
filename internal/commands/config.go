@@ -38,5 +38,9 @@ func configAction(ctx *cli.Context) error {
 
 	fmt.Printf("cache-path            %s\n", conf.CachePath())
 
+	fmt.Printf("opencage-key          %s\n", conf.OpenCageKey())
+	fmt.Printf("nominatim-url         %s\n", conf.NominatimUrl())
+	fmt.Printf("photon-url            %s\n", conf.PhotonUrl())
+
 	return nil
 }

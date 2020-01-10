@@ -9,11 +9,11 @@ type LocationResponse struct {
 	ID       string        `json:"id"`
 	Name     string        `json:"name"`
 	Category string        `json:"category"`
-	Suburb   string        `json:"suburb"`
 	Timezone string        `json:"timezone"`
 	Lat      float64       `json:"lat"`
 	Lng      float64       `json:"lng"`
 	Place    *entity.Place `json:"place"`
+	Licence  string        `json:"licence"`
 }
 
 // Timezone returns the location time zone as string.
@@ -41,11 +41,11 @@ func NewLocationResponse(el *entity.Location) *LocationResponse {
 		ID:       el.ID,
 		Name:     el.Name(),
 		Category: el.Category(),
-		Suburb:   el.Suburb(),
 		Timezone: Timezone(lat, lng),
 		Lat:      lat,
 		Lng:      lng,
 		Place:    el.Place,
+		Licence:  "Data © OpenStreetMap contributors, ODbL 1.0, see https://osm.org/copyright",
 	}
 
 	return l

@@ -8,8 +8,8 @@ import (
 )
 
 var Retries = 2
-var Timeout = time.Second * 5
-var Agent = "photoprism-places"
+var Timeout = time.Second * 15
+var Agent = "photoprism.org"
 
 var log = event.Log
 

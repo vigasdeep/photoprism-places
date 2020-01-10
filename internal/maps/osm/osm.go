@@ -11,6 +11,7 @@ import (
 	"github.com/photoprism/photoprism-places/internal/event"
 )
 
-const ProviderName = "osm"
+var ProviderName = "osm"
+var NominatimUrl = "https://nominatim.openstreetmap.org/"
 
 var log = event.Log

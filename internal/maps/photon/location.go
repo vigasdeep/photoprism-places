@@ -1,4 +1,4 @@
-package opencage
+package photon
 
 import (
 	"strings"
@@ -7,10 +7,11 @@ import (
 type Location struct {
 	ID          string
 	LocName     string
-	LocCategory string
 	LocCity     string
 	LocState    string
 	LocCountry  string
+	OsmKey string
+	OsmValue string
 }
 
 func (l Location) CellID() string {

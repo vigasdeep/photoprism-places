@@ -95,4 +95,16 @@ var GlobalFlags = []cli.Flag{
 		Usage:  "opencage api key",
 		EnvVar: "PLACES_OPENCAGE_KEY",
 	},
+	cli.StringFlag{
+		Name:   "photon-url",
+		Usage:  "photon server url",
+		EnvVar: "PLACES_PHOTON_URL",
+		Value:  "https://photon.komoot.de/",
+	},
+	cli.StringFlag{
+		Name:   "nominatim-url",
+		Usage:  "nominatim server url",
+		EnvVar: "PLACES_NOMINATIM_URL",
+		Value:  "https://nominatim.openstreetmap.org/",
+	},
 }

@@ -19,6 +19,9 @@ services:
       PLACES_ASSETS_PATH: "/go/src/github.com/photoprism/photoprism-places/assets"
       PLACES_CACHE_PATH: "/go/src/github.com/photoprism/photoprism-places/assets/cache"
       PLACES_CONFIG_PATH: "/go/src/github.com/photoprism/photoprism-places/assets/config"
+      PLACES_PHOTON_URL: "http://photon:2322/reverse?lat=%f&lon=%f"
+      PLACES_NOMINATIM_URL: "https://nominatim.openstreetmap.org/"
+      PLACES_OPENCAGE_KEY: ""
 
   places-db:
     image: mariadb:10.4.11
@@ -32,3 +35,10 @@ services:
       MYSQL_USER: places
       MYSQL_PASSWORD: places
       MYSQL_DATABASE: places
+
+  photon:
+    image: photoprism/photon:latest
+    ports:
+      - 2322:2322 # [local port]:[container port]
+    volumes:
+      - "./photon_data:/home/photon/photon_data"

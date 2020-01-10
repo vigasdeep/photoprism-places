@@ -11,10 +11,12 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-var ReverseLookupURL = "https://api.opencagedata.com/geocode/v1/json?key=%s&q=%f+%f&pretty=0&no_annotations=1"
-
 // API docs see https://opencagedata.com/api#reverse-resp
 func FindLocation(id string) (result Location, err error) {
+	if ProviderKey == "" {
+		return result, errors.New("opencage: no provider key")
+	}
+
 	if len(id) > 16 || len(id) == 0 {
 		return result, errors.New("opencage: invalid location id")
 	}
@@ -25,7 +27,7 @@ func FindLocation(id string) (result Location, err error) {
 		return result, fmt.Errorf("opencage: skipping lat %f, lng %f", lat, lng)
 	}
 
-	url := fmt.Sprintf(ReverseLookupURL, ApiKey, lat, lng)
+	url := fmt.Sprintf("%sgeocode/v1/json?key=%s&q=%f+%f&pretty=0&no_annotations=1", ProviderUrl, ProviderKey, lat, lng)
 
 	log.Debugf("opencage: query %s", url)
 
@@ -56,7 +58,6 @@ func FindLocation(id string) (result Location, err error) {
 	result.ID = id
 	result.LocCity = j.Get("results.0.components.city").String()
 	result.LocState = j.Get("results.0.components.state").String()
-	result.LocSuburb = j.Get("results.0.components.suburb").String()
 	result.LocCategory = j.Get("results.0.components._type").String()
 
 	if n := j.Get("results.0.components.unknown").String(); n != "" {

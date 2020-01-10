@@ -6,6 +6,7 @@ import (
 
 	"github.com/photoprism/photoprism-places/internal/maps/opencage"
 	"github.com/photoprism/photoprism-places/internal/maps/osm"
+	"github.com/photoprism/photoprism-places/internal/maps/photon"
 )
 
 /* TODO
@@ -27,7 +28,6 @@ type Location struct {
 	ID          string
 	LocName     string
 	LocCategory string
-	LocSuburb   string
 	LocLabel    string
 	LocCity     string
 	LocState    string
@@ -41,7 +41,6 @@ type LocationSource interface {
 	Category() string
 	Name() string
 	City() string
-	Suburb() string
 	State() string
 	Source() string
 }
@@ -56,6 +55,8 @@ func NewLocation(id string) *Location {
 
 func (l *Location) QueryApi(api string) error {
 	switch api {
+	case photon.ProviderName:
+		return l.QueryPhoton()
 	case osm.ProviderName:
 		return l.QueryOSM()
 	case opencage.ProviderName:
@@ -66,11 +67,15 @@ func (l *Location) QueryApi(api string) error {
 }
 
 func (l *Location) Query() error {
-	if opencage.ApiKey == "" {
+	if err := l.QueryPhoton(); err == nil {
+		return nil
+	}
+
+	if opencage.ProviderKey == "" {
 		return l.QueryOSM()
 	}
 
-	if err := l.QueryOpenCage; err != nil {
+	if err := l.QueryOpenCage(); err != nil {
 		return l.QueryOSM()
 	}
 
@@ -79,6 +84,16 @@ func (l *Location) Query() error {
 
 func (l *Location) QueryOSM() error {
 	s, err := osm.FindLocation(l.ID)
+
+	if err != nil {
+		return err
+	}
+
+	return l.Assign(s)
+}
+
+func (l *Location) QueryPhoton() error {
+	s, err := photon.FindLocation(l.ID)
 
 	if err != nil {
 		return err
@@ -109,7 +124,6 @@ func (l *Location) Assign(s LocationSource) error {
 
 	l.LocName = s.Name()
 	l.LocCity = s.City()
-	l.LocSuburb = s.Suburb()
 	l.LocState = s.State()
 	l.LocCountry = s.CountryCode()
 	l.LocCategory = s.Category()
@@ -153,10 +167,6 @@ func (l Location) Name() string {
 
 func (l Location) Category() string {
 	return l.LocCategory
-}
-
-func (l Location) Suburb() string {
-	return l.LocSuburb
 }
 
 func (l Location) Label() string {

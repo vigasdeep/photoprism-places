@@ -9,16 +9,14 @@ import (
 
 // Photo place
 type Place struct {
-	ID          string    `gorm:"type:varbinary(16);primary_key;auto_increment:false;" json:"id"`
-	LocLabel    string    `gorm:"type:varbinary(500);unique_index;" json:"label"`
-	LocCity     string    `gorm:"type:varchar(100);" json:"city"`
-	LocState    string    `gorm:"type:varchar(100);" json:"state"`
-	LocCountry  string    `gorm:"type:binary(2);" json:"country"`
-	LocNotes    string    `gorm:"type:text;" json:"-"`
-	LocFavorite bool      `json:"-"`
-	CreatedAt   time.Time `json:"-"`
-	UpdatedAt   time.Time `json:"-"`
-	New         bool      `gorm:"-" json:"-"`
+	ID         string    `gorm:"type:varbinary(16);primary_key;auto_increment:false;" json:"id"`
+	LocLabel   string    `gorm:"type:varbinary(500);unique_index;" json:"label"`
+	LocCity    string    `gorm:"type:varchar(100);" json:"city"`
+	LocState   string    `gorm:"type:varchar(100);" json:"state"`
+	LocCountry string    `gorm:"type:binary(2);" json:"country"`
+	CreatedAt  time.Time `json:"-"`
+	UpdatedAt  time.Time `json:"-"`
+	New        bool      `gorm:"-" json:"-"`
 }
 
 var UnknownPlace = NewPlace("-", "Unknown", "Unknown", "Unknown", "zz")
@@ -101,8 +99,4 @@ func (m *Place) CountryCode() string {
 
 func (m *Place) CountryName() string {
 	return maps.CountryNames[m.LocCountry]
-}
-
-func (m *Place) Notes() string {
-	return m.LocNotes
 }

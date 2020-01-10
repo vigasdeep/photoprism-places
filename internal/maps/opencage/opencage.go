@@ -11,12 +11,13 @@ import (
 	"github.com/photoprism/photoprism-places/internal/event"
 )
 
-const ProviderName = "opencage"
+var ProviderName = "opencage"
+var ProviderUrl = "https://api.opencagedata.com/"
+var ProviderKey = ""
 
-var ApiKey = ""
 var log = event.Log
 
-var opencageTypes = map[string]string{
+var ocTypes = map[string]string{
 	"aerodrome":           "airport",
 	"apron":               "airport",
 	"control_tower":       "airport",

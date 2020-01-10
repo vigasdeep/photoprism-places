@@ -16,9 +16,8 @@ type Location struct {
 	ID          string    `gorm:"type:varbinary(16);primary_key;auto_increment:false;" json:"id"`
 	PlaceID     string    `gorm:"type:varbinary(16);" json:"-"`
 	Place       *Place    `json:"place"`
-	LocName     string    `gorm:"type:varchar(100);" json:"name"`
+	LocName     string    `gorm:"type:varchar(200);" json:"name"`
 	LocCategory string    `gorm:"type:varchar(50);" json:"category"`
-	LocSuburb   string    `gorm:"type:varchar(100);" json:"suburb"`
 	LocSource   string    `gorm:"type:varbinary(16);" json:"-"`
 	CreatedAt   time.Time `json:"-"`
 	UpdatedAt   time.Time `json:"-"`
@@ -68,7 +67,6 @@ func (m *Location) Find(db *gorm.DB) error {
 
 	m.LocName = l.LocName
 	m.LocCategory = l.LocCategory
-	m.LocSuburb = l.LocSuburb
 	m.LocSource = l.LocSource
 
 	if err := db.Create(m).Error; err != nil {
@@ -82,7 +80,6 @@ func (m *Location) Find(db *gorm.DB) error {
 func (m *Location) Keywords() []string {
 	result := []string{
 		strings.ToLower(m.City()),
-		strings.ToLower(m.Suburb()),
 		strings.ToLower(m.State()),
 		strings.ToLower(m.CountryName()),
 		strings.ToLower(m.Category()),
@@ -90,7 +87,6 @@ func (m *Location) Keywords() []string {
 
 	result = append(result, util.Keywords(m.Name())...)
 	result = append(result, util.Keywords(m.Label())...)
-	result = append(result, util.Keywords(m.Notes())...)
 
 	return result
 }
@@ -113,14 +109,6 @@ func (m *Location) Category() string {
 
 func (m *Location) NoCategory() bool {
 	return m.LocCategory == ""
-}
-
-func (m *Location) Suburb() string {
-	return m.LocSuburb
-}
-
-func (m *Location) NoSuburb() bool {
-	return m.LocSuburb == ""
 }
 
 func (m *Location) Label() string {
@@ -157,10 +145,6 @@ func (m *Location) CountryCode() string {
 
 func (m *Location) CountryName() string {
 	return m.Place.CountryName()
-}
-
-func (m *Location) Notes() string {
-	return m.Place.Notes()
 }
 
 func (m *Location) Source() string {

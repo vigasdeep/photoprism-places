@@ -1,6 +1,7 @@
 package entity
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -8,20 +9,15 @@ import (
 
 // Events
 type Event struct {
-	EventUUID        string `gorm:"type:varbinary(36);unique_index;"`
-	EventSlug        string
-	EventName        string
-	EventType        string
-	EventDescription string    `gorm:"type:text;"`
-	EventNotes       string    `gorm:"type:text;"`
-	EventBegin       time.Time `gorm:"type:datetime;"`
-	EventEnd         time.Time `gorm:"type:datetime;"`
-	EventLat         float64
-	EventLng         float64
-	EventDist        float64
-	CreatedAt        time.Time
-	UpdatedAt        time.Time
-	DeletedAt        *time.Time `sql:"index"`
+	ID         string       `gorm:"type:varbinary(36);primary_key;auto_increment:false;" json:"id"`
+	Location   string       `gorm:"type:varbinary(16);unique_index;" json:"location"`
+	EventName  string       `gorm:"type:varchar(200);" json:"name"`
+	EventType  string       `gorm:"type:varbinary(50);" json:"type"`
+	EventInfo  string       `gorm:"type:varbinary(2000);" json:"info"`
+	EventUrl   string       `gorm:"type:varbinary(200);" json:"url"`
+	EventStart time.Time    `gorm:"type:datetime;index;" json:"start"`
+	EventEnd   sql.NullTime `gorm:"type:datetime;" json:"end"`
+	UpdatedAt  time.Time    `json:"updated"`
 }
 
 func (Event) TableName() string {
@@ -29,5 +25,5 @@ func (Event) TableName() string {
 }
 
 func (e *Event) BeforeCreate(scope *gorm.Scope) error {
-	return scope.SetColumn("EventUUID", ID('e'))
+	return scope.SetColumn("ID", ID('e'))
 }

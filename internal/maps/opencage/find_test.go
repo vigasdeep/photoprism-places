@@ -8,7 +8,7 @@ import (
 )
 
 func TestFindLocation(t *testing.T) {
-	ApiKey = "f9585987890741ceac625709e8efea3b"
+	ProviderKey = "f9585987890741ceac625709e8efea3b"
 
 	t.Run("berlin", func(t *testing.T) {
 		lat := 52.5208
@@ -52,7 +52,6 @@ func TestFindLocation(t *testing.T) {
 
 		assert.Equal(t, "", l.Category())
 
-		assert.Equal(t, "Tegel", l.Suburb())
 		assert.Equal(t, "Berlin", l.City())
 		assert.Equal(t, "de", l.CountryCode())
 	})
@@ -66,7 +65,6 @@ func TestFindLocation(t *testing.T) {
 
 		assert.Equal(t, "zoo", l.Category())
 		assert.Equal(t, "Tierpark Berlin", l.Name())
-		assert.Equal(t, "Friedrichsfelde", l.Suburb())
 		assert.Equal(t, "Berlin", l.City())
 		assert.Equal(t, "de", l.CountryCode())
 	})
