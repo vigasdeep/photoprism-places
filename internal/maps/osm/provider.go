@@ -11,4 +11,6 @@ import (
 	"github.com/photoprism/photoprism-places/internal/event"
 )
 
+const ProviderName = "osm"
+
 var log = event.Log

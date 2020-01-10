@@ -1,13 +1,53 @@
 package maps
 
 import (
+	"os"
 	"strings"
 	"testing"
 
+	"github.com/photoprism/photoprism-places/internal/maps/opencage"
 	"github.com/photoprism/photoprism-places/internal/maps/osm"
 	"github.com/photoprism/photoprism-places/internal/s2"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestMain(m *testing.M) {
+	opencage.ApiKey = "f9585987890741ceac625709e8efea3b"
+
+	os.Exit(m.Run())
+}
+
+func TestLocation_Query(t *testing.T) {
+	t.Run(osm.ProviderName, func(t *testing.T) {
+		lat := 52.5208
+		lng := 13.40953
+		id := s2.Token(lat, lng)
+
+		l := NewLocation(id)
+
+		if err := l.QueryApi(osm.ProviderName); err != nil {
+			t.Fatal(err)
+		}
+
+		assert.Equal(t, "Fernsehturm Berlin", l.LocName)
+		assert.Equal(t, "Berlin, Germany", l.LocLabel)
+	})
+
+	t.Run(opencage.ProviderName, func(t *testing.T) {
+		lat := 52.5208
+		lng := 13.40953
+		id := s2.Token(lat, lng)
+
+		l := NewLocation(id)
+
+		if err := l.QueryApi(opencage.ProviderName); err != nil {
+			t.Fatal(err)
+		}
+
+		assert.Equal(t, "Fernsehturm Berlin", l.LocName)
+		assert.Equal(t, "Berlin, Germany", l.LocLabel)
+	})
+}
 
 func TestLocation_QueryOSM(t *testing.T) {
 	t.Run("BerlinFernsehturm", func(t *testing.T) {
@@ -18,6 +58,23 @@ func TestLocation_QueryOSM(t *testing.T) {
 		l := NewLocation(id)
 
 		if err := l.QueryOSM(); err != nil {
+			t.Fatal(err)
+		}
+
+		assert.Equal(t, "Fernsehturm Berlin", l.LocName)
+		assert.Equal(t, "Berlin, Germany", l.LocLabel)
+	})
+}
+
+func TestLocation_QueryOpenCage(t *testing.T) {
+	t.Run("BerlinFernsehturm", func(t *testing.T) {
+		lat := 52.5208
+		lng := 13.40953
+		id := s2.Token(lat, lng)
+
+		l := NewLocation(id)
+
+		if err := l.QueryOpenCage(); err != nil {
 			t.Fatal(err)
 		}
 
@@ -66,7 +123,6 @@ func TestLocation_Assign(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.False(t, o.Cached)
 		assert.Equal(t, 79854991, o.PlaceID)
 		assert.Equal(t, "Santa Monica Pier", o.LocName)
 		assert.Equal(t, "90401", o.Address.Postcode)
@@ -94,8 +150,6 @@ func TestLocation_Assign(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-
-		assert.False(t, o.Cached)
 
 		assert.Equal(t, 115198412, o.PlaceID)
 		assert.Equal(t, "Dock A", o.LocName)
@@ -125,8 +179,6 @@ func TestLocation_Assign(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.False(t, o.Cached)
-
 		assert.Equal(t, 25410613, o.PlaceID)
 		assert.Equal(t, "TGL", o.LocName)
 		assert.Equal(t, "13405", o.Address.Postcode)
@@ -154,8 +206,6 @@ func TestLocation_Assign(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-
-		assert.False(t, o.Cached)
 
 		assert.Equal(t, 119616937, o.PlaceID)
 		assert.Equal(t, "Pink Beach", o.LocName)
@@ -186,8 +236,6 @@ func TestLocation_Assign(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.False(t, o.Cached)
-
 		assert.Equal(t, 164551421, o.PlaceID)
 		assert.Equal(t, "", o.LocName)
 		assert.Equal(t, "07307", o.Address.Postcode)
@@ -216,8 +264,6 @@ func TestLocation_Assign(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-
-		assert.False(t, o.Cached)
 
 		assert.Equal(t, 98820569, o.PlaceID)
 		assert.Equal(t, "R411", o.LocName)
@@ -249,8 +295,6 @@ func TestLocation_Assign(t *testing.T) {
 		if err == nil {
 			t.Fatal("expected error")
 		}
-
-		assert.False(t, o.Cached)
 
 		var l Location
 

@@ -90,4 +90,9 @@ var GlobalFlags = []cli.Flag{
 		Usage:  "debug, release or test",
 		EnvVar: "PLACES_HTTP_MODE",
 	},
+	cli.StringFlag{
+		Name:   "opencage-key",
+		Usage:  "opencage api key",
+		EnvVar: "PLACES_OPENCAGE_KEY",
+	},
 }

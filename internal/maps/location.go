@@ -4,6 +4,7 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/photoprism/photoprism-places/internal/maps/opencage"
 	"github.com/photoprism/photoprism-places/internal/maps/osm"
 )
 
@@ -53,8 +54,41 @@ func NewLocation(id string) *Location {
 	return result
 }
 
+func (l *Location) QueryApi(api string) error {
+	switch api {
+	case osm.ProviderName:
+		return l.QueryOSM()
+	case opencage.ProviderName:
+		return l.QueryOpenCage()
+	}
+
+	return l.Query()
+}
+
+func (l *Location) Query() error {
+	if opencage.ApiKey == "" {
+		return l.QueryOSM()
+	}
+
+	if err := l.QueryOpenCage; err != nil {
+		return l.QueryOSM()
+	}
+
+	return nil
+}
+
 func (l *Location) QueryOSM() error {
 	s, err := osm.FindLocation(l.ID)
+
+	if err != nil {
+		return err
+	}
+
+	return l.Assign(s)
+}
+
+func (l *Location) QueryOpenCage() error {
+	s, err := opencage.FindLocation(l.ID)
 
 	if err != nil {
 		return err

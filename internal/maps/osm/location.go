@@ -4,11 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"net/http"
 	"strings"
-	"time"
 
-	"github.com/melihmucuk/geocache"
+	"github.com/photoprism/photoprism-places/internal/maps/client"
 	"github.com/photoprism/photoprism-places/internal/s2"
 	"github.com/photoprism/photoprism-places/internal/util"
 )
@@ -21,7 +19,6 @@ type Location struct {
 	LocType        string  `json:"type"`
 	LocDisplayName string  `json:"display_name"`
 	Address        Address `json:"address"`
-	Cached         bool
 }
 
 var ReverseLookupURL = "https://nominatim.openstreetmap.org/reverse?lat=%f&lon=%f&format=jsonv2&accept-language=en&zoom=18"
@@ -38,27 +35,18 @@ func FindLocation(id string) (result Location, err error) {
 		return result, fmt.Errorf("osm: skipping lat %f, lng %f", lat, lng)
 	}
 
-	point := geocache.GeoPoint{Latitude: lat, Longitude: lng}
-
-	if hit, ok := geoCache.Get(point); ok {
-		log.Debugf("osm: cache hit for lat %f, lng %f", lat, lng)
-		result = hit.(Location)
-		result.Cached = true
-		return result, nil
-	}
-
 	url := fmt.Sprintf(ReverseLookupURL, lat, lng)
 
 	log.Debugf("osm: query %s", url)
 
-	r, err := http.Get(url)
+	res, err := client.Request(url)
 
 	if err != nil {
 		log.Errorf("osm: %s", err.Error())
 		return result, err
 	}
 
-	err = json.NewDecoder(r.Body).Decode(&result)
+	err = json.NewDecoder(res.Body).Decode(&result)
 
 	if err != nil {
 		log.Errorf("osm: %s", err.Error())
@@ -72,10 +60,6 @@ func FindLocation(id string) (result Location, err error) {
 	}
 
 	result.ID = id
-
-	geoCache.Set(point, result, time.Hour)
-
-	result.Cached = false
 
 	return result, nil
 }
@@ -127,5 +111,5 @@ func (l Location) Keywords() (result []string) {
 }
 
 func (l Location) Source() string {
-	return "osm"
+	return ProviderName
 }

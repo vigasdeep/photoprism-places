@@ -1,6 +1,6 @@
 package osm
 
-var osmCategories = map[string]string{
+var categories = map[string]string{
 	"aeroway=*":                "airport",
 	"natural=bay":              "bay",
 	"natural=peninsula":        "peninsula",

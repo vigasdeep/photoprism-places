@@ -13,6 +13,7 @@ import (
 	gc "github.com/patrickmn/go-cache"
 	"github.com/photoprism/photoprism-places/internal/entity"
 	"github.com/photoprism/photoprism-places/internal/event"
+	"github.com/photoprism/photoprism-places/internal/maps/opencage"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
@@ -287,8 +288,9 @@ func (c *Config) MigrateDb() {
 	entity.CreateUnknownCountry(db)
 }
 
-// Init initialises the Database.
+// Init initialises the application config.
 func (c *Config) Init(ctx context.Context) error {
+	opencage.ApiKey = c.OpenCageKey()
 	return c.connectToDatabase(ctx)
 }
 
@@ -299,4 +301,13 @@ func (c *Config) Shutdown() {
 	} else {
 		log.Info("closed database connection")
 	}
+}
+
+// OpenCageKey returns the OpenCage API Key.
+func (c *Config) OpenCageKey() string {
+	if c.config.OpenCageKey == "" {
+		log.Error("config: OpenCage API key is missing")
+	}
+
+	return c.config.OpenCageKey
 }

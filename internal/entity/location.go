@@ -52,7 +52,7 @@ func (m *Location) Find(db *gorm.DB) error {
 		ID: m.ID,
 	}
 
-	if err := l.QueryOSM(); err != nil {
+	if err := l.Query(); err != nil {
 		return err
 	}
 

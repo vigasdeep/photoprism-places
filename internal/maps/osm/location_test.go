@@ -19,7 +19,6 @@ func TestFindLocation(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.False(t, l.Cached)
 		assert.Equal(t, 189675302, l.PlaceID)
 		assert.Equal(t, "Fernsehturm Berlin", l.LocName)
 		assert.Equal(t, "10178", l.Address.Postcode)
@@ -30,20 +29,6 @@ func TestFindLocation(t *testing.T) {
 		l.PlaceID = 123456
 
 		assert.Equal(t, 123456, l.PlaceID)
-
-		cached, err := FindLocation(id)
-
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		assert.True(t, cached.Cached)
-		assert.Equal(t, 189675302, cached.PlaceID)
-		assert.Equal(t, l.LocName, cached.LocName)
-		assert.Equal(t, l.Address.Postcode, cached.Address.Postcode)
-		assert.Equal(t, l.Address.State, cached.Address.State)
-		assert.Equal(t, l.Address.CountryCode, cached.Address.CountryCode)
-		assert.Equal(t, l.Address.Country, cached.Address.Country)
 	})
 
 	t.Run("Fernsehturm Berlin 2", func(t *testing.T) {
@@ -57,7 +42,6 @@ func TestFindLocation(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		assert.False(t, l.Cached)
 		assert.Equal(t, 189675302, l.PlaceID)
 		assert.Equal(t, "Fernsehturm Berlin", l.LocName)
 		assert.Equal(t, "10178", l.Address.Postcode)
@@ -71,14 +55,13 @@ func TestFindLocation(t *testing.T) {
 		lng := 0.0
 		id := s2.Token(lat, lng)
 
-		l, err := FindLocation(id)
+		_, err := FindLocation(id)
 
 		if err == nil {
 			t.Fatal("err should not be nil")
 		}
 
 		assert.Equal(t, "osm: invalid location id", err.Error())
-		assert.False(t, l.Cached)
 	})
 }
 

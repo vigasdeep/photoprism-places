@@ -7,11 +7,11 @@ func (l Location) Category() (result string) {
 	catKey := fmt.Sprintf("%s=*", l.LocCategory)
 	typeKey := fmt.Sprintf("*=%s", l.LocType)
 
-	if result, ok := osmCategories[key]; ok {
+	if result, ok := categories[key]; ok {
 		return result
-	} else if result, ok := osmCategories[catKey]; ok {
+	} else if result, ok := categories[catKey]; ok {
 		return result
-	} else if result, ok := osmCategories[typeKey]; ok {
+	} else if result, ok := categories[typeKey]; ok {
 		return result
 	}
 
