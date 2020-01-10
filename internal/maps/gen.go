@@ -68,10 +68,10 @@ func main() {
 
 	packageTemplate.Execute(f, struct {
 		Countries []Country
-		Reverse []Country
+		Reverse   []Country
 	}{
 		Countries: countries,
-		Reverse: reverse,
+		Reverse:   reverse,
 	})
 }
 

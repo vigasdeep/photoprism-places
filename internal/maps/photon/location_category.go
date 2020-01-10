@@ -4,7 +4,6 @@ import (
 	"fmt"
 )
 
-
 func (l Location) Category() (result string) {
 	key := fmt.Sprintf("%s=%s", l.OsmKey, l.OsmValue)
 	catKey := fmt.Sprintf("%s=*", l.OsmKey)

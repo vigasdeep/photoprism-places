@@ -1,5 +1,6 @@
 # Application files and directories
 /places
+/photon_data
 *.log
 
 # Binaries for programs and plugins

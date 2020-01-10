@@ -355,7 +355,7 @@ func TestLocation_City(t *testing.T) {
 
 func TestLocation_State(t *testing.T) {
 	t.Run("Bayern", func(t *testing.T) {
-		l := &Location{LocCountry: "de", LocCity: "Nürnberg", LocState: "Bayern", LocName: "Christkindlesmarkt", }
+		l := &Location{LocCountry: "de", LocCity: "Nürnberg", LocState: "Bayern", LocName: "Christkindlesmarkt"}
 
 		assert.Equal(t, "Bayern", l.State())
 	})
@@ -363,7 +363,7 @@ func TestLocation_State(t *testing.T) {
 
 func TestLocation_Category(t *testing.T) {
 	t.Run("test", func(t *testing.T) {
-		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocState: "Bayern", LocName: "Christkindlesmarkt",}
+		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocState: "Bayern", LocName: "Christkindlesmarkt"}
 
 		assert.Equal(t, "test", l.Category())
 	})
@@ -379,7 +379,7 @@ func TestLocation_Source(t *testing.T) {
 
 func TestLocation_Place(t *testing.T) {
 	t.Run("test-label", func(t *testing.T) {
-		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocLabel: "test-label", LocState: "Bayern", LocName: "Christkindlesmarkt", }
+		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocLabel: "test-label", LocState: "Bayern", LocName: "Christkindlesmarkt"}
 
 		assert.Equal(t, "test-label", l.Label())
 	})
@@ -387,7 +387,7 @@ func TestLocation_Place(t *testing.T) {
 
 func TestLocation_CountryCode(t *testing.T) {
 	t.Run("de", func(t *testing.T) {
-		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocLabel: "test-label", LocState: "Bayern", LocName: "Christkindlesmarkt", }
+		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocLabel: "test-label", LocState: "Bayern", LocName: "Christkindlesmarkt"}
 
 		assert.Equal(t, "de", l.CountryCode())
 	})
@@ -395,7 +395,7 @@ func TestLocation_CountryCode(t *testing.T) {
 
 func TestLocation_CountryName(t *testing.T) {
 	t.Run("Germany", func(t *testing.T) {
-		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocLabel: "test-label", LocState: "Bayern", LocName: "Christkindlesmarkt", }
+		l := &Location{LocCategory: "test", LocCountry: "de", LocCity: "Nürnberg", LocLabel: "test-label", LocState: "Bayern", LocName: "Christkindlesmarkt"}
 
 		assert.Equal(t, "Germany", l.CountryName())
 	})

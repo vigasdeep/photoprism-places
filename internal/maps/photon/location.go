@@ -5,13 +5,13 @@ import (
 )
 
 type Location struct {
-	ID          string
-	LocName     string
-	LocCity     string
-	LocState    string
-	LocCountry  string
-	OsmKey string
-	OsmValue string
+	ID         string
+	LocName    string
+	LocCity    string
+	LocState   string
+	LocCountry string
+	OsmKey     string
+	OsmValue   string
 }
 
 func (l Location) CellID() string {
