@@ -1,5 +1,5 @@
-PhotoPrism Places: Reverse Geocoding API
-========================================
+PhotoPrism Places: Geocoding API
+================================
 
 [![License: AGPL](https://img.shields.io/badge/license-AGPL-blue.svg)][license]
 [![Code Quality](https://goreportcard.com/badge/github.com/photoprism/photoprism-places)][goreport]
