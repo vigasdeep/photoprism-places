@@ -13,18 +13,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/jinzhu/gorm"
 	"github.com/photoprism/photoprism-places/internal/event"
 	"github.com/photoprism/photoprism-places/internal/util"
 )
 
 var log = event.Log
-
-func logError(result *gorm.DB) {
-	if result.Error != nil {
-		log.Error(result.Error.Error())
-	}
-}
 
 func ID(prefix rune) string {
 	result := make([]byte, 0, 17)

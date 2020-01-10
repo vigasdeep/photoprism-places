@@ -12,3 +12,4 @@ import (
 )
 
 var log = event.Log
+var dataLicense = "Data © OpenStreetMap contributors, ODbL 1.0, see https://osm.org/copyright"

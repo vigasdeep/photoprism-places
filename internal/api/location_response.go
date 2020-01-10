@@ -6,14 +6,15 @@ import (
 )
 
 type LocationResponse struct {
-	ID       string        `json:"id"`
-	Name     string        `json:"name"`
-	Category string        `json:"category"`
-	Timezone string        `json:"timezone"`
-	Lat      float64       `json:"lat"`
-	Lng      float64       `json:"lng"`
-	Place    *entity.Place `json:"place"`
-	Licence  string        `json:"licence"`
+	ID       string         `json:"id"`
+	Name     string         `json:"name"`
+	Category string         `json:"category"`
+	Timezone string         `json:"timezone"`
+	Lat      float64        `json:"lat"`
+	Lng      float64        `json:"lng"`
+	Place    *entity.Place  `json:"place"`
+	Events   []entity.Event `json:"events"`
+	Licence  string         `json:"licence"`
 }
 
 // Timezone returns the location time zone as string.
@@ -45,7 +46,8 @@ func NewLocationResponse(el *entity.Location) *LocationResponse {
 		Lat:      lat,
 		Lng:      lng,
 		Place:    el.Place,
-		Licence:  "Data © OpenStreetMap contributors, ODbL 1.0, see https://osm.org/copyright",
+		Events:   []entity.Event{},
+		Licence:  dataLicense,
 	}
 
 	return l
