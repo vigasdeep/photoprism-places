@@ -19,7 +19,32 @@ func (l Location) CellID() string {
 }
 
 func (l Location) City() string {
-	return strings.TrimSpace(l.LocCity)
+	result := strings.TrimSpace(l.LocCity)
+	lower := strings.ToLower(result)
+	parts := strings.Split(lower, " ")
+
+	if len(parts) < 3 {
+		return result
+	}
+
+	last := len(parts) - 1
+
+	if parts[last] != "municipality" {
+		return result
+	}
+
+	if municipalityBlacklist[parts[0]] {
+		return ""
+	}
+
+	if parts[last - 1] == "local" {
+		i := strings.Index(lower, "local municipality") - 1
+		return result[:i]
+	}
+
+	i := strings.Index(lower, "municipality") - 1
+
+	return result[:i]
 }
 
 func (l Location) State() string {
