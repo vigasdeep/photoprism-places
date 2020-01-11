@@ -9,11 +9,49 @@ PhotoPrism Places: Geocoding API
 [![Community Chat](https://img.shields.io/badge/chat-on%20gitter-4aa087.svg)][chat]
 [![Twitter](https://img.shields.io/badge/follow-@browseyourlife-00acee.svg)][twitter]
 
-Note that this is work in progress. We do our best to provide a stable version soon. 
+Note that this is work in progress. We are happy to assist other OSS projects that don't have the time or expertise to run their own infrastructure.
 
-Please follow us on [Twitter][twitter] and leave a star if you like this project, it provides additional motivation to keep going.
+## Example Request ## 
 
-Thank you very much! <3
+https://places.photoprism.org/v1/location/149ce78563
+
+```json
+{
+  "id":"149ce78563",
+  "name":"Pink Beach",
+  "category":"nature",
+  "timezone":"Europe/Athens",
+  "lat":35.26963621850717,
+  "lng":23.53695076231683,
+  "place": {
+    "id":"149ce78563",
+    "label":"Chrisoskalitissa, Crete, Greece",
+    "city":"Chrisoskalitissa",
+    "state":"Crete",
+    "country":"gr"
+  },
+  "events":[],
+  "licence":"Data © OpenStreetMap contributors"
+}
+```
+
+## Privacy ##
+
+Geocoding requests are NOT logged, but developers can of course see cached items in MariaDB without personal information. That's the point of a cache. Those will be randomly distributed with hot spots around tourist attractions and big cities.
+
+Because of HTTPS, your internet provider can't see the exact request, just that you contacted a server.
+
+The API approximates coordinates, encodes them with S2 and doesn't care about street or house number:
+
+![](https://pbs.twimg.com/media/EN9AoYdWkAIqVDD?format=jpg&name=medium)
+
+## Performance ##
+
+First [benchmarks](https://github.com/tsliwowicz/go-wrk) show that up to 2500 req/s can be handled. Compare this with the pricing of commercial providers and you'll see the value.
+
+If you prefer running this on-site: We use a 6-core Intel Xeon processor, 320 GB of SSD and 16 GB of memory. 
+In addition you'll have to download ~100 GB of data.
+Due to the properties of S2 cell IDs, scaling and sharding should be easy if needed.
 
 ## How to contribute ##
 
@@ -25,6 +63,10 @@ good (first) contributions. Don't be afraid to ask stupid questions.
 
 Feature requests backed by sponsors are marked with a golden [sponsor][sponsored issues] label.
 Let us know if we mistakenly label an idea as [unfunded][unfunded issues].
+
+Please follow us on [Twitter][twitter] and leave a star if you like this project, it provides additional motivation to keep going.
+
+Thank you very much! <3
 
 ## Disclaimer ##
 
