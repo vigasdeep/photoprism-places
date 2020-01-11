@@ -19,7 +19,7 @@ services:
       PLACES_ASSETS_PATH: "/go/src/github.com/photoprism/photoprism-places/assets"
       PLACES_CACHE_PATH: "/go/src/github.com/photoprism/photoprism-places/assets/cache"
       PLACES_CONFIG_PATH: "/go/src/github.com/photoprism/photoprism-places/assets/config"
-      PLACES_PHOTON_URL: "http://photon:2322/reverse?lat=%f&lon=%f"
+      PLACES_PHOTON_URL: "http://photon:2322/"
       PLACES_NOMINATIM_URL: "https://nominatim.openstreetmap.org/"
       PLACES_OPENCAGE_KEY: ""
 
