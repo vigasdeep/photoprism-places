@@ -85,3 +85,5 @@ tidy:
 photon_data:
 	wget -O - http://download1.graphhopper.com/public/photon-db-latest.tar.bz2 | pbzip2 -cd | tar x
     chown -R 1000:1000 photon_data
+places-db:
+	docker-compose exec places-db mysql -u places --password=places places
