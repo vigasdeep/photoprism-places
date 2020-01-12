@@ -17,7 +17,6 @@ install: install-bin install-assets
 test: test-go
 test-all: test
 fmt: fmt-go
-upgrade: upgrade-go
 start:
 	go run cmd/places/places.go start -d
 stop:
@@ -38,6 +37,8 @@ install-assets:
 	find ~/.local/share/places -name '.*' -type f -delete
 dep-go:
 	go build -v ./...
+dep-upgrade:
+	go get -u -t ./...
 build-go:
 	rm -f $(BINARY_NAME)
 	scripts/build.sh debug $(BINARY_NAME)
@@ -81,9 +82,6 @@ fmt-go:
 	go fmt ./internal/... ./cmd/...
 tidy:
 	go mod tidy
-upgrade-go:
-	go mod tidy
-	go get -u
 photon_data:
 	wget -O - http://download1.graphhopper.com/public/photon-db-latest.tar.bz2 | pbzip2 -cd | tar x
     chown -R 1000:1000 photon_data

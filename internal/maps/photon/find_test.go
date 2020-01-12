@@ -3,7 +3,7 @@ package photon
 import (
 	"testing"
 
-	"github.com/photoprism/photoprism-places/internal/s2"
+	"github.com/photoprism/photoprism/pkg/s2"
 	"github.com/stretchr/testify/assert"
 )
 

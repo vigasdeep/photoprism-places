@@ -7,8 +7,8 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"github.com/photoprism/photoprism-places/internal/maps"
-	"github.com/photoprism/photoprism-places/internal/s2"
-	"github.com/photoprism/photoprism-places/internal/util"
+	"github.com/photoprism/photoprism/pkg/s2"
+	"github.com/photoprism/photoprism/pkg/txt"
 )
 
 // Photo location
@@ -85,8 +85,8 @@ func (m *Location) Keywords() []string {
 		strings.ToLower(m.Category()),
 	}
 
-	result = append(result, util.Keywords(m.Name())...)
-	result = append(result, util.Keywords(m.Label())...)
+	result = append(result, txt.Keywords(m.Name())...)
+	result = append(result, txt.Keywords(m.Label())...)
 
 	return result
 }

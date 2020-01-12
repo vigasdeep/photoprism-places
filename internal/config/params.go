@@ -8,7 +8,7 @@ import (
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/photoprism/photoprism-places/internal/util"
+	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/urfave/cli"
 	"gopkg.in/yaml.v2"
 )
@@ -65,7 +65,7 @@ func NewParams(ctx *cli.Context) *Params {
 	c.Name = ctx.App.Name
 	c.Copyright = ctx.App.Copyright
 	c.Version = ctx.App.Version
-	c.ConfigFile = util.ExpandedFilename(ctx.GlobalString("config-file"))
+	c.ConfigFile = fs.ExpandFilename(ctx.GlobalString("config-file"))
 
 	if err := c.SetValuesFromFile(c.ConfigFile); err != nil {
 		log.Debug(err)
@@ -81,15 +81,15 @@ func NewParams(ctx *cli.Context) *Params {
 }
 
 func (c *Params) expandFilenames() {
-	c.ConfigPath = util.ExpandedFilename(c.ConfigPath)
-	c.AssetsPath = util.ExpandedFilename(c.AssetsPath)
-	c.CachePath = util.ExpandedFilename(c.CachePath)
-	c.LogFilename = util.ExpandedFilename(c.LogFilename)
+	c.ConfigPath = fs.ExpandFilename(c.ConfigPath)
+	c.AssetsPath = fs.ExpandFilename(c.AssetsPath)
+	c.CachePath = fs.ExpandFilename(c.CachePath)
+	c.LogFilename = fs.ExpandFilename(c.LogFilename)
 }
 
 // SetValuesFromFile uses a yaml config file to initiate the configuration entity.
 func (c *Params) SetValuesFromFile(fileName string) error {
-	if !util.Exists(fileName) {
+	if !fs.FileExists(fileName) {
 		return errors.New(fmt.Sprintf("config file not found: \"%s\"", fileName))
 	}
 

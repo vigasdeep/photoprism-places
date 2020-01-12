@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/photoprism/photoprism-places/internal/maps/client"
-	"github.com/photoprism/photoprism-places/internal/s2"
+	"github.com/photoprism/photoprism/pkg/s2"
 
 	"github.com/tidwall/gjson"
 )
@@ -62,7 +62,6 @@ func FindLocation(id string) (result Location, err error) {
 
 	result.OsmKey = j.Get("features.0.properties.osm_key").String()
 	result.OsmValue = j.Get("features.0.properties.osm_value").String()
-
 	result.LocName = j.Get("features.0.properties.name").String()
 
 	result.LocCountry = Countries[strings.ToLower(j.Get("features.0.properties.country").String())]

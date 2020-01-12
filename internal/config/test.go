@@ -6,7 +6,7 @@ import (
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/photoprism/photoprism-places/internal/util"
+	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
@@ -24,7 +24,7 @@ func testDataPath(assetsPath string) string {
 }
 
 func NewTestParams() *Params {
-	assetsPath := util.ExpandedFilename("../../assets")
+	assetsPath := fs.ExpandFilename("../../assets")
 
 	testDataPath := testDataPath(assetsPath)
 
@@ -39,7 +39,7 @@ func NewTestParams() *Params {
 }
 
 func NewTestParamsError() *Params {
-	assetsPath := util.ExpandedFilename("../..")
+	assetsPath := fs.ExpandFilename("../..")
 
 	testDataPath := testDataPath("../../assets")
 

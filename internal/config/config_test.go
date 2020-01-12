@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/photoprism/photoprism-places/internal/util"
+	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -18,7 +18,7 @@ func TestNewConfig(t *testing.T) {
 
 	assert.IsType(t, new(Config), c)
 
-	assert.Equal(t, util.ExpandedFilename("../../assets"), c.AssetsPath())
+	assert.Equal(t, fs.ExpandFilename("../../assets"), c.AssetsPath())
 	assert.False(t, c.Debug())
 }
 

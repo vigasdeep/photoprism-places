@@ -3,7 +3,7 @@ package osm
 import (
 	"strings"
 
-	"github.com/photoprism/photoprism-places/internal/util"
+	"github.com/photoprism/photoprism/pkg/txt"
 )
 
 type Location struct {
@@ -59,7 +59,7 @@ func (l Location) CountryCode() (result string) {
 }
 
 func (l Location) Keywords() (result []string) {
-	return util.Keywords(l.LocDisplayName)
+	return txt.Keywords(l.LocDisplayName)
 }
 
 func (l Location) Source() string {

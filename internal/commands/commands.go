@@ -12,14 +12,14 @@ import (
 	"syscall"
 
 	"github.com/photoprism/photoprism-places/internal/event"
-	"github.com/photoprism/photoprism-places/internal/util"
+	"github.com/photoprism/photoprism/pkg/fs"
 	"github.com/sevlyar/go-daemon"
 )
 
 var log = event.Log
 
 func childAlreadyRunning(filePath string) (pid int, running bool) {
-	if !util.Exists(filePath) {
+	if !fs.FileExists(filePath) {
 		return pid, false
 	}
 

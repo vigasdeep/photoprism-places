@@ -2,6 +2,8 @@ package photon
 
 import (
 	"strings"
+
+	"github.com/photoprism/photoprism/pkg/txt"
 )
 
 type Location struct {
@@ -33,7 +35,7 @@ func (l Location) City() string {
 		return result
 	}
 
-	if municipalityBlacklist[parts[0]] {
+	if txt.TitlesAndRanks[parts[0]] {
 		return ""
 	}
 

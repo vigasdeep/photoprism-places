@@ -6,7 +6,7 @@ import (
 	"fmt"
 
 	"github.com/photoprism/photoprism-places/internal/maps/client"
-	"github.com/photoprism/photoprism-places/internal/s2"
+	"github.com/photoprism/photoprism/pkg/s2"
 )
 
 // API docs see https://wiki.openstreetmap.org/wiki/Nominatim#Reverse_Geocoding
