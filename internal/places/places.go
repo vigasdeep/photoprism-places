@@ -5,7 +5,7 @@ Additional information can be found in our Developer Guide:
 
 https://github.com/photoprism/photoprism/wiki
 */
-package maps
+package places
 
 import (
 	"github.com/photoprism/photoprism-places/internal/event"

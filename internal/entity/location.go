@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/photoprism/photoprism-places/internal/maps"
+	"github.com/photoprism/photoprism-places/internal/places"
 	"github.com/photoprism/photoprism/pkg/s2"
 	"github.com/photoprism/photoprism/pkg/txt"
 )
@@ -47,7 +47,7 @@ func (m *Location) Find(db *gorm.DB) error {
 		return nil
 	}
 
-	l := &maps.Location{
+	l := &places.Location{
 		ID: m.ID,
 	}
 

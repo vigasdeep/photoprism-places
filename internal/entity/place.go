@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"github.com/photoprism/photoprism-places/internal/maps"
+	"github.com/photoprism/photoprism-places/internal/places"
 )
 
 // Photo place
@@ -98,5 +98,5 @@ func (m *Place) CountryCode() string {
 }
 
 func (m *Place) CountryName() string {
-	return maps.CountryNames[m.LocCountry]
+	return places.CountryNames[m.LocCountry]
 }

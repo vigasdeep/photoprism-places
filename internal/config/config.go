@@ -13,9 +13,9 @@ import (
 	gc "github.com/patrickmn/go-cache"
 	"github.com/photoprism/photoprism-places/internal/entity"
 	"github.com/photoprism/photoprism-places/internal/event"
-	"github.com/photoprism/photoprism-places/internal/maps/opencage"
-	"github.com/photoprism/photoprism-places/internal/maps/osm"
-	"github.com/photoprism/photoprism-places/internal/maps/photon"
+	"github.com/photoprism/photoprism-places/internal/places/opencage"
+	"github.com/photoprism/photoprism-places/internal/places/osm"
+	"github.com/photoprism/photoprism-places/internal/places/photon"
 	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )

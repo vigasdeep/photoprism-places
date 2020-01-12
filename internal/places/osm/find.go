@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/photoprism/photoprism-places/internal/maps/client"
+	"github.com/photoprism/photoprism-places/internal/places/client"
 	"github.com/photoprism/photoprism/pkg/s2"
 )
 
