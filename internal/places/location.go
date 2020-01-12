@@ -100,7 +100,10 @@ func (l *Location) Assign(s LocationSource) error {
 
 	cat := s.Category()
 
-	if !ignoreCategories[cat] {
+	if ignoreCategories[cat] {
+		l.LocName = ""
+		l.LocCategory = ""
+	} else {
 		l.LocName = s.Name()
 		l.LocCategory = s.Category()
 	}
