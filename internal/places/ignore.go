@@ -1,0 +1,25 @@
+package places
+
+var ignoreCategories = map[string]bool{
+	"restaurant":       true,
+	"hotel":            true,
+	"parking":          true,
+	"community center": true,
+	"pub":              true,
+	"car":              true,
+	"police":           true,
+	"shelter":          true,
+	"tank":             true,
+	"greenhouse":       true,
+	"escape game":      true,
+	"cafe":             true,
+	"shop":             true,
+	"bar":              true,
+	"bank":             true,
+	"pharmacy":         true,
+	"cinema":           true,
+	"swimming":         true,
+	"bookstore":        true,
+	"boutique":         true,
+	"butcher":          true,
+}
