@@ -53,8 +53,15 @@ func (l Location) State() string {
 	return strings.TrimSpace(l.LocState)
 }
 
-func (l Location) CountryCode() string {
-	return strings.TrimSpace(l.LocCountry)
+func (l Location) CountryCode() (result string) {
+	result = strings.ToLower(strings.TrimSpace(l.LocCountry))
+
+	// Use zz as code for unknown country e.g. international waters
+	if result == "" {
+		result = "zz"
+	}
+
+	return result
 }
 
 func (l Location) Source() string {

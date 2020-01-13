@@ -53,9 +53,14 @@ func (l Location) Suburb() (result string) {
 }
 
 func (l Location) CountryCode() (result string) {
-	result = l.Address.CountryCode
+	result = strings.ToLower(strings.TrimSpace(l.Address.CountryCode))
 
-	return strings.ToLower(strings.TrimSpace(result))
+	// Use zz as code for unknown country e.g. international waters
+	if result == "" {
+		result = "zz"
+	}
+
+	return result
 }
 
 func (l Location) Keywords() (result []string) {
