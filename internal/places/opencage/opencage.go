@@ -57,7 +57,7 @@ var ocTypes = map[string]string{
 	"ocean":               "ocean",
 	"gallery":             "gallery",
 	"museum":              "museum",
-	"alpine_hut":          "alpine hut",
+	"alpine_hut":          "alpine",
 	"aquarium":            "aquarium",
 	"artwork":             "exhibition",
 	"camp_pitch":          "camping",
